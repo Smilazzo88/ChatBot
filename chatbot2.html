@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chat-box {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            height: 400px;
+            overflow-y: scroll;
+        }
+
+        .chat-message {
+            margin: 10px 0;
+        }
+
+        .user-message {
+            text-align: left;
+            color: #66ccff;
+        }
+
+        .bot-message {
+            text-align: right;
+            color: #ffcc66;
+        }
+
+        #input-area {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Talk to Your AI Bot!</h1>
+
+    <!-- Chatbox -->
+    <div id="chat-box"></div>
+
+    <!-- User Input -->
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Ask me anything!">
+        <button onclick="getResponse()">Send</button>
+    </div>
+
+    <script>
+        // List of responses based on user input
+        const responses = {
+            "who is wanda maximoff": "Wanda Maximoff, also known as Scarlet Witch, is a powerful superhero in the Marvel universe who can manipulate reality itself!",
+            "tell me about star wars": "Star Wars is a space opera that blends science fiction and fantasy, focusing on the battle between the Jedi and the Sith. May the Force be with you!",
+            "who is katniss everdeen": "Katniss Everdeen is the main character in *The Hunger Games*, known for her archery skills and her role in leading a revolution.",
+            "what is karma": "Karma is the concept in Buddhism and Hinduism that our actions in this life affect our future lives. It's the idea of cosmic cause and effect.",
+            "who is president obama": "Barack Obama was the 44th President of the United States, known for his leadership in passing the Affordable Care Act and promoting progressive values.",
+            "how do you feel about aliens": "Aliens could be out there, exploring the cosmos or watching us from afar. It’s fascinating to think that we may not be alone in the universe!",
+            "who is princess leia": "Princess Leia Organa is a beloved character in *Star Wars*, a leader of the Rebel Alliance and twin sister to Luke Skywalker.",
+            "what is a time traveler": "A time traveler is someone who journeys through time, often through a machine or portal, and explores different periods in history or the future!"
+        };
+
+        // Function to send and receive messages
+        function getResponse() {
+            const userInput = document.getElementById("user-input").value.toLowerCase();
+            const chatBox = document.getElementById("chat-box");
+
+            if (userInput) {
+                // Display user message
+                const userMessage = document.createElement("div");
+                userMessage.classList.add("chat-message", "user-message");
+                userMessage.textContent = userInput;
+                chatBox.appendChild(userMessage);
+
+                // Display bot response
+                const botMessage = document.createElement("div");
+                botMessage.classList.add("chat-message", "bot-message");
+
+                if (responses[userInput]) {
+                    botMessage.textContent = responses[userInput];
+                } else {
+                    botMessage.textContent = "Sorry, I don't understand that. Try asking about Star Wars or Marvel!";
+                }
+
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+
+                // Clear input field
+                document.getElementById("user-input").value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
